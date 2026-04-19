@@ -1,0 +1,16 @@
+@import 'tailwindcss' source(none);
+@import 'fumadocs-ui/css/black.css';
+@import 'fumadocs-ui/css/preset.css';
+ 
+@source ".";
+@source "../components";
+@source '../node_modules/fumadocs-ui/dist/**/*.js';
+
+@theme {
+  --default-font-family: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+:root {
+  --fd-layout-width: 1600px;
+}

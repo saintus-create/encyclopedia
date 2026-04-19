@@ -12,6 +12,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         {...baseOptions}
         sidebar={{
           prefetch: false,
+          defaultOpenLevel: 0,
         }}
       >
         {children}

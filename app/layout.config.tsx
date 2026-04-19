@@ -1,13 +1,9 @@
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
-import { BookOpenIcon } from "lucide-react";
 
 export const baseOptions: BaseLayoutProps = {
   nav: {
     title: (
-      <span className="inline-flex flex-row gap-2 items-center font-semibold text-base">
-        <BookOpenIcon className="size-5" />
-        Encyclopedia of Rhetoric
-      </span>
+      <span className="font-serif text-xl font-bold tracking-tight">E</span>
     ),
   },
   links: [

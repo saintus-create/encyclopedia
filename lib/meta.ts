@@ -8,7 +8,8 @@ export const meta: VirtualFile[] = [
       title: "Encyclopedia of Rhetoric",
       root: true,
       pages: [
-        "[About](/docs/about)",
+        "index",
+        "about",
         "...a",
         "...b",
         "...c",

@@ -5,8 +5,7 @@ import * as path from "node:path";
 import { getTitleFromFile } from "../source";
 import { meta } from "../meta";
 
-const token = process.env.GITHUB_PERSONAL_ACCESS_TOKEN || process.env.GITHUB_TOKEN;
-if (!token) throw new Error(`environment variable GITHUB_PERSONAL_ACCESS_TOKEN is needed.`);
+const token = process.env.GITHUB_PERSONAL_ACCESS_TOKEN || process.env.GITHUB_TOKEN || "";
 
 const config = {
   owner: "vercel",

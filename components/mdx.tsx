@@ -4,6 +4,7 @@ import { Tabs, Tab } from "fumadocs-ui/components/tabs";
 import defaultMdxComponents from "fumadocs-ui/mdx";
 import { Check, X } from "lucide-react";
 import { Fragment, type ReactNode } from "react";
+import { BibliographyCard, SeeAlsoCard, SeeAlsoLink } from "./encyclopedia";
 
 const isRemoteImage = true;
 
@@ -14,6 +15,9 @@ const mdxComponents = {
   Tab,
   Check,
   Cross: X,
+  BibliographyCard,
+  SeeAlsoCard,
+  SeeAlsoLink,
   Image: ({
     srcDark,
     srcLight,

@@ -1,7 +1,7 @@
 @import 'tailwindcss' source(none);
 @import 'fumadocs-ui/css/black.css';
 @import 'fumadocs-ui/css/preset.css';
- 
+
 @source ".";
 @source "../components";
 @source '../node_modules/fumadocs-ui/dist/**/*.js';
@@ -13,17 +13,47 @@
 
 :root {
   /* 3-column grid */
-  --fd-layout-width: 1400px;
-  --fd-sidebar-width: 272px;
-  --fd-toc-width: 240px;
-  --fd-nav-height: 56px;
+  --fd-layout-width: 1280px;
+  --fd-sidebar-width: 240px;
+  --fd-toc-width: 200px;
+  --fd-nav-height: 48px;
 
-  /* Consistent border radius everywhere */
+  /* Consistent border radius */
   --fd-radius: 0.375rem;
   --radius: 0.375rem;
 }
 
-/* Apply consistent radius to all rounded elements */
+/* Sidebar: same color as page background */
+aside,
+.fd-sidebar,
+[data-sidebar],
+nav[class*='sidebar'] {
+  background-color: var(--fd-background) !important;
+  background: var(--fd-background) !important;
+  border-right: none !important;
+}
+
+/* Reduce overall scale */
+html {
+  font-size: 14px;
+}
+
+/* Tighten prose line-height and spacing */
+.prose {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+}
+
+.prose p {
+  margin-top: 0.85em;
+  margin-bottom: 0.85em;
+}
+
+.prose h1 { font-size: 1.6rem; margin-top: 1.5rem; margin-bottom: 0.5rem; }
+.prose h2 { font-size: 1.25rem; margin-top: 1.4rem; margin-bottom: 0.4rem; }
+.prose h3 { font-size: 1.05rem; margin-top: 1.2rem; margin-bottom: 0.3rem; }
+
+/* Consistent radius */
 .rounded,
 .rounded-md,
 .rounded-lg,
@@ -33,7 +63,7 @@
   border-radius: var(--radius) !important;
 }
 
-/* Prose: strip bold and italic */
+/* Strip bold and italic from prose */
 .prose strong,
 .prose b,
 [data-prose] strong,
@@ -52,7 +82,8 @@ article i {
   font-style: normal;
 }
 
-/* Center each column's content */
-.fd-sidebar {
-  align-items: center;
+/* Tighter nav */
+.fd-nav {
+  padding-top: 0;
+  padding-bottom: 0;
 }

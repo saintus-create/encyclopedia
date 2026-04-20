@@ -3,7 +3,11 @@ import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
 export const baseOptions: BaseLayoutProps = {
   nav: {
     title: (
-      <span className="font-serif text-xl font-bold tracking-tight">E</span>
+      <img
+        src="/logo.png"
+        alt="Encyclopedia of Rhetoric and Composition"
+        className="h-8 w-auto"
+      />
     ),
   },
   links: [
@@ -18,3 +22,4 @@ export const baseOptions: BaseLayoutProps = {
     },
   ],
 };
+

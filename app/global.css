@@ -12,5 +12,47 @@
 }
 
 :root {
-  --fd-layout-width: 1600px;
+  /* 3-column grid */
+  --fd-layout-width: 1400px;
+  --fd-sidebar-width: 272px;
+  --fd-toc-width: 240px;
+  --fd-nav-height: 56px;
+
+  /* Consistent border radius everywhere */
+  --fd-radius: 0.375rem;
+  --radius: 0.375rem;
+}
+
+/* Apply consistent radius to all rounded elements */
+.rounded,
+.rounded-md,
+.rounded-lg,
+.rounded-xl,
+.rounded-2xl,
+[class*='rounded'] {
+  border-radius: var(--radius) !important;
+}
+
+/* Prose: strip bold and italic */
+.prose strong,
+.prose b,
+[data-prose] strong,
+[data-prose] b,
+article strong,
+article b {
+  font-weight: inherit;
+}
+
+.prose em,
+.prose i,
+[data-prose] em,
+[data-prose] i,
+article em,
+article i {
+  font-style: normal;
+}
+
+/* Center each column's content */
+.fd-sidebar {
+  align-items: center;
 }

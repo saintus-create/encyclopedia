@@ -11,106 +11,148 @@
   --font-mono: var(--font-geist-mono);
 }
 
-/*
- * Base/Uber design system dimensions
- * 4px base unit — all spacing is a multiple of 4
- * Radius: 4px (medium) consistent everywhere
- * Type scale: 12 / 14 / 16 / 20 / 24 / 32px
- */
+/* ============================================================
+ * DESIGN TOKENS — single source of truth
+ * Anything visual on the site references these values.
+ * Built on a 4px spatial grid. One font. One radius.
+ * ============================================================ */
 
 :root {
-  /* Layout — 4px grid: 1280 = 320×4, nav = 12×4, sidebar = 60×4, toc = 52×4 */
-  --fd-layout-width: 1280px;
-  --fd-sidebar-width: 240px;
-  --fd-toc-width: 208px;
-  --fd-nav-height: 48px;
+  /* --- TYPOGRAPHY --- one family for all UI + content */
+  --font-ui: var(--font-geist-sans);
 
-  /* Radius — 4px medium token (Base borderRadiusMedium) */
-  --fd-radius: 4px;
+  /* Type scale (14 base) */
+  --text-xs:   12px;
+  --text-sm:   14px;
+  --text-base: 16px;
+  --text-md:   18px;
+  --text-lg:   20px;
+  --text-xl:   24px;
+  --text-2xl:  32px;
+
+  /* Weights — never use bold */
+  --w-regular: 400;
+  --w-medium:  500;
+
+  /* --- SPACING --- 4px grid */
+  --s-1:  4px;
+  --s-2:  8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-8: 32px;
+
+  /* --- RADIUS --- single token */
   --radius: 4px;
+  --fd-radius: 4px;
+
+  /* --- LAYOUT --- 4px-aligned */
+  --fd-layout-width:  1280px;
+  --fd-sidebar-width:  240px;
+  --fd-toc-width:      208px;
+  --fd-nav-height:      48px;
 }
 
-/* Sidebar: same color as page background, no border */
-aside,
-.fd-sidebar,
-[data-sidebar],
-nav[class*='sidebar'] {
-  background-color: var(--fd-background) !important;
-  background: var(--fd-background) !important;
-  border-right: none !important;
+/* ============================================================
+ * HARD RESETS — enforce the source of truth
+ * ============================================================ */
+
+/* One font everywhere — no serif, no mono in chrome */
+html, body, button, input, select, textarea,
+.fd-nav, .fd-sidebar, aside, nav,
+h1, h2, h3, h4, h5, h6, p, span, a, li, div {
+  font-family: var(--font-ui), system-ui, sans-serif;
 }
 
-/* Consistent 4px radius everywhere */
-.rounded,
-.rounded-md,
-.rounded-lg,
-.rounded-xl,
-.rounded-2xl,
+/* No uppercase. Anywhere. Ever. */
+* {
+  text-transform: none !important;
+  letter-spacing: normal !important;
+}
+
+/* Strip bold and italic from prose */
+strong, b { font-weight: var(--w-regular) !important; }
+em, i     { font-style: normal !important; }
+
+/* Single radius for everything */
+.rounded, .rounded-sm, .rounded-md, .rounded-lg,
+.rounded-xl, .rounded-2xl, .rounded-3xl,
 [class*='rounded'] {
   border-radius: var(--radius) !important;
 }
 
-/* Base type scale: 14px body (scale200) */
-html {
-  font-size: 14px;
+/* ============================================================
+ * SIDEBAR — match page background, no panel feel
+ * ============================================================ */
+
+aside, .fd-sidebar, [data-sidebar],
+nav[class*='sidebar'] {
+  background: var(--fd-background) !important;
+  border-right: none !important;
 }
 
-/* Prose — aligned to 4px grid */
+/* ============================================================
+ * BASE TYPE — 14px root, clear hierarchy
+ * ============================================================ */
+
+html { font-size: var(--text-sm); }
+
 .prose {
-  font-size: 1rem;       /* 14px */
-  line-height: 1.714;   /* 24px — 6×4 */
+  font-size: var(--text-sm);
+  line-height: 1.714;  /* 24px */
+  color: var(--fd-foreground);
 }
 
-/* Headings: 32 / 24 / 20 / 16px */
 .prose h1 {
-  font-size: 2.286rem;   /* 32px — 8×4 */
+  font-size: var(--text-2xl);
+  font-weight: var(--w-medium);
   line-height: 1.25;
-  margin-top: 2.286rem;  /* 32px */
-  margin-bottom: 1rem;   /* 16px */
-  font-weight: 400;
+  margin: var(--s-8) 0 var(--s-4);
 }
 .prose h2 {
-  font-size: 1.714rem;   /* 24px — 6×4 */
+  font-size: var(--text-xl);
+  font-weight: var(--w-medium);
   line-height: 1.333;
-  margin-top: 2rem;      /* 28px ~= 7×4 */
-  margin-bottom: 0.571rem; /* 8px */
-  font-weight: 400;
+  margin: var(--s-6) 0 var(--s-2);
 }
 .prose h3 {
-  font-size: 1.429rem;   /* 20px — 5×4 */
+  font-size: var(--text-lg);
+  font-weight: var(--w-medium);
   line-height: 1.4;
-  margin-top: 1.714rem;  /* 24px */
-  margin-bottom: 0.571rem; /* 8px */
-  font-weight: 400;
+  margin: var(--s-5) 0 var(--s-2);
 }
 .prose h4 {
-  font-size: 1.143rem;   /* 16px — 4×4 */
+  font-size: var(--text-base);
+  font-weight: var(--w-medium);
   line-height: 1.5;
-  margin-top: 1.143rem;
-  margin-bottom: 0.571rem;
-  font-weight: 400;
+  margin: var(--s-4) 0 var(--s-2);
 }
 
-/* Paragraph spacing: 16px between — 4×4 */
 .prose p {
-  margin-top: 1.143rem;
-  margin-bottom: 1.143rem;
+  margin: var(--s-4) 0;
 }
 
-/* Strip bold and italic from prose */
-.prose strong,
-.prose b,
-[data-prose] strong,
-[data-prose] b,
-article strong,
-article b {
-  font-weight: inherit;
-}
-.prose em,
-.prose i,
-[data-prose] em,
-[data-prose] i,
-article em,
-article i {
-  font-style: normal;
+/* ============================================================
+ * MOBILE — restore hierarchy and separation
+ * ============================================================ */
+
+@media (max-width: 768px) {
+  :root {
+    --fd-sidebar-width: 100%;
+  }
+
+  .prose {
+    padding: 0 var(--s-4);
+  }
+
+  .prose h1 { font-size: var(--text-xl); }
+  .prose h2 { font-size: var(--text-lg); }
+  .prose h3 { font-size: var(--text-base); }
+
+  /* Visible separation on mobile menu/sheet */
+  [data-mobile], [class*='Sheet'], [class*='Drawer'] {
+    background: var(--fd-card) !important;
+    border-color: var(--fd-border) !important;
+  }
 }

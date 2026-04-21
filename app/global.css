@@ -7,8 +7,8 @@
 @source '../node_modules/fumadocs-ui/dist/**/*.js';
 
 @theme {
-  --default-font-family: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --default-font-family: var(--font-inter-tight);
+  --font-mono: var(--font-inter-tight);
 }
 
 /* ============================================================
@@ -19,7 +19,7 @@
 
 :root {
   /* --- TYPOGRAPHY --- one family for all UI + content */
-  --font-ui: var(--font-geist-sans);
+  --font-ui: var(--font-inter-tight);
 
   /* Type scale (14 base) */
   --text-xs:   12px;

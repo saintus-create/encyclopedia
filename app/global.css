@@ -58,11 +58,11 @@
  * HARD RESETS — enforce the source of truth
  * ============================================================ */
 
-/* One font everywhere — no serif, no mono in chrome */
-html, body, button, input, select, textarea,
-.fd-nav, .fd-sidebar, aside, nav,
-h1, h2, h3, h4, h5, h6, p, span, a, li, div {
-  font-family: var(--font-ui), system-ui, sans-serif;
+/* One font everywhere — Inter Tight with sans fallback, forced via !important */
+html, body, button, input, select, textarea, code, pre, kbd, samp,
+.fd-nav, .fd-sidebar, aside, nav, main, article, section,
+h1, h2, h3, h4, h5, h6, p, span, a, li, div, label {
+  font-family: var(--font-inter-tight), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
 }
 
 /* No uppercase. Anywhere. Ever. */

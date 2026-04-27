@@ -188,14 +188,17 @@ body {
   margin: 0 var(--s-2);
 }
 
-/* Eyebrow ("Entry", "Section A", etc.) — Apple's small uppercase tag */
+/* Eyebrow ("Entry", "Section A", etc.) — sentence case, regular weight,
+   muted gray, ~19px. Apple uses this exact pattern above every page H1
+   (e.g. "Structure", "Protocol", "Article"), NOT a tiny uppercase tag. */
 .ad-eyebrow {
-  font-size: var(--fs-eyebrow);
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-size: 19px;
+  font-weight: 400;
+  letter-spacing: 0.012em;
+  line-height: 1.21053;
   color: var(--ad-muted);
-  margin: 0 0 var(--s-2);
+  margin: 0 0 var(--s-3);
+  text-transform: none;
 }
 
 /* H1: Apple docs page title — 40 / 48 / -0.003em / 600 (NOT the marketing 56) */

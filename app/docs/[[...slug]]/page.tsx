@@ -58,14 +58,15 @@ export default async function Page(props: {
     slugSegs.length > 0 && LETTER_NAME[slugSegs[0]] ? slugSegs[0] : null;
   const sectionLabel = sectionLetter ? LETTER_NAME[sectionLetter] : null;
 
-  // Apple uses "Protocol", "Article", "Tutorial" etc. as the eyebrow above
-  // a docs page H1 to disambiguate the page kind. The encyclopedia maps
-  // cleanly onto: index pages = "Section", entry pages = "Entry".
+  // Apple uses a single capitalized noun ("Protocol", "Article", "Structure")
+  // in regular weight gray above each H1 to disambiguate the page kind.
+  // Encyclopedia mapping: index = "Section", root index = "Overview",
+  // article pages = "Article".
   const eyebrow = isIndex
     ? sectionLabel
-      ? `Section ${sectionLabel}`
+      ? "Section"
       : "Overview"
-    : "Entry";
+    : "Article";
 
   return (
     <DocsPage toc={content.toc} full={content.full}>

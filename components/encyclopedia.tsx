@@ -2,14 +2,17 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 
 /**
- * BibliographyCard — collapsible section, not a heavy bordered card.
- * Just a top divider with a labeled toggle and indented content.
+ * BibliographyCard — collapsible list. No card chrome, just a labeled
+ * top divider with indented content. Matches the encyclopedia's
+ * editorial restraint while keeping the Replit-paper background.
  */
 export function BibliographyCard({ children }: { children: ReactNode }) {
   return (
-    <details className="not-prose group mt-8 border-t border-fd-border pt-4">
+    <details className="not-prose group mt-10 border-t border-[var(--rep-rule)] pt-4">
       <summary className="flex cursor-pointer list-none items-center justify-between select-none">
-        <span className="text-sm text-fd-muted-foreground">Bibliography</span>
+        <span className="text-[12px] font-medium uppercase tracking-[0.06em] text-[var(--rep-ink-muted)]">
+          Bibliography
+        </span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="14"
@@ -20,12 +23,12 @@ export function BibliographyCard({ children }: { children: ReactNode }) {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="text-fd-muted-foreground transition-transform duration-200 group-open:rotate-180"
+          className="text-[var(--rep-ink-muted)] transition-transform duration-200 group-open:rotate-180"
         >
           <path d="m6 9 6 6 6-6" />
         </svg>
       </summary>
-      <div className="mt-4 text-sm leading-7 text-fd-muted-foreground [&>p]:mt-3 [&>p:first-child]:mt-0">
+      <div className="mt-4 text-[14px] leading-7 text-[var(--rep-ink-soft)] [&>p]:mt-3 [&>p:first-child]:mt-0">
         {children}
       </div>
     </details>
@@ -33,17 +36,25 @@ export function BibliographyCard({ children }: { children: ReactNode }) {
 }
 
 /**
- * SeeAlsoCard — light section with simple link chips.
+ * SeeAlsoCard — flat divider section, populated with pill-style links.
+ * Cross-reference UI for the encyclopedia.
  */
 export function SeeAlsoCard({ children }: { children: ReactNode }) {
   return (
-    <div className="not-prose mt-6 border-t border-fd-border pt-4">
-      <div className="text-sm text-fd-muted-foreground mb-3">See also</div>
+    <div className="not-prose mt-10 border-t border-[var(--rep-rule)] pt-4">
+      <div className="mb-3 text-[12px] font-medium uppercase tracking-[0.06em] text-[var(--rep-ink-muted)]">
+        See also
+      </div>
       <div className="flex flex-wrap gap-2">{children}</div>
     </div>
   );
 }
 
+/**
+ * SeeAlsoLink — pill in the Replit Workstation outlined-tile style.
+ * Default state: paper background + hairline border.
+ * Hover: orange accent.
+ */
 export function SeeAlsoLink({
   href,
   children,
@@ -54,7 +65,7 @@ export function SeeAlsoLink({
   return (
     <Link
       href={href}
-      className="inline-flex items-center rounded border border-fd-border px-3 py-1 text-sm text-fd-foreground transition-colors hover:bg-fd-accent hover:text-fd-accent-foreground"
+      className="inline-flex items-center rounded-md border border-[var(--rep-rule)] bg-white px-3 py-1.5 text-[13px] font-medium text-[var(--rep-ink)] no-underline transition hover:border-[var(--rep-orange)] hover:bg-[var(--rep-orange-soft)] hover:text-[var(--rep-orange)]"
     >
       {children}
     </Link>

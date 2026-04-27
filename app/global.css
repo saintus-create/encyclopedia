@@ -1,371 +1,235 @@
-@import 'tailwindcss' source(none);
-@import 'fumadocs-ui/css/black.css';
-@import 'fumadocs-ui/css/preset.css';
+@import "tailwindcss";
+@import "fumadocs-ui/css/neutral.css";
+@import "fumadocs-ui/css/preset.css";
 
-@source ".";
-@source "../components";
-@source '../node_modules/fumadocs-ui/dist/**/*.js';
-
-/* ============================================================
- * ENCYCLOPEDIA OF RHETORIC — DESIGN SYSTEM
- * Single source of truth. Editorial. Restrained. Scholarly.
- * Built on a 4px grid with one typeface (Inter Tight).
- * ============================================================ */
-
-@theme {
-  --default-font-family: var(--font-inter-tight), -apple-system,
-    BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: var(--font-inter-tight), -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, sans-serif;
-}
-
+/* =========================================================================
+   Apple Developer Documentation palette + type system
+   ========================================================================= */
 :root {
-  /* --- COLOR (light) — book paper, charcoal ink, muted accent --- */
-  --color-paper:        #fafaf7;   /* warm off-white background */
-  --color-ink:          #1a1a1a;   /* near-black text */
-  --color-ink-soft:     #4a4a4a;   /* secondary text */
-  --color-ink-muted:    #8a8a85;   /* tertiary / labels */
-  --color-rule:         #e6e4dc;   /* dividers */
-  --color-rule-strong:  #d3d0c5;   /* stronger dividers */
-  --color-surface:      #f3f1ea;   /* sidebar / subtle panels */
-  --color-accent:       #8a3a2a;   /* deep terracotta — bookplate red */
-  --color-accent-soft:  #f0e6e2;
+  /* surfaces */
+  --ad-paper: #ffffff;
+  --ad-paper-2: #fbfbfd;
+  --ad-paper-3: #f5f5f7;
+  --ad-card: #ffffff;
+  --ad-card-hover: #f5f5f7;
 
-  /* Map Fumadocs tokens to our palette */
-  --fd-background:        var(--color-paper);
-  --fd-foreground:        var(--color-ink);
-  --fd-muted:             var(--color-surface);
-  --fd-muted-foreground:  var(--color-ink-soft);
-  --fd-card:              var(--color-paper);
-  --fd-card-foreground:   var(--color-ink);
-  --fd-popover:           var(--color-paper);
-  --fd-popover-foreground:var(--color-ink);
-  --fd-primary:           var(--color-accent);
-  --fd-primary-foreground:#ffffff;
-  --fd-secondary:         var(--color-surface);
-  --fd-secondary-foreground:var(--color-ink);
-  --fd-accent:            var(--color-surface);
-  --fd-accent-foreground: var(--color-ink);
-  --fd-border:            var(--color-rule);
-  --fd-ring:              var(--color-accent);
+  /* ink */
+  --ad-ink: #1d1d1f;
+  --ad-ink-2: #424245;
+  --ad-muted: #6e6e73;
+  --ad-subtle: #86868b;
 
-  /* --- TYPE SCALE — modular, 16px base --- */
-  --text-xs:    12px;
-  --text-sm:    14px;
-  --text-base:  16px;
-  --text-md:    18px;
-  --text-lg:    22px;
-  --text-xl:    28px;
-  --text-2xl:   36px;
+  /* lines */
+  --ad-rule: #d2d2d7;
+  --ad-rule-soft: #e5e5ea;
 
-  --leading-tight:  1.2;
-  --leading-snug:   1.4;
-  --leading-normal: 1.6;
-  --leading-loose:  1.75;
+  /* accents */
+  --ad-blue: #0066cc;
+  --ad-blue-hover: #0077ed;
+  --ad-link: #2997ff;
+  --ad-orange: #f05138;
 
-  --w-regular: 400;
-  --w-medium:  500;
+  /* nav */
+  --ad-nav: #1d1d1f;
+  --ad-nav-fg: #f5f5f7;
+  --ad-nav-fg-dim: rgba(245, 245, 247, 0.7);
 
-  /* --- SPACING — 4px grid --- */
-  --s-1:  4px;
-  --s-2:  8px;
+  /* footer */
+  --ad-footer: #f5f5f7;
+  --ad-footer-fg: #6e6e73;
+
+  /* type scale — pulled from developer.apple.com SF Pro measurements */
+  --fs-eyebrow: 12px;
+  --fs-meta: 14px;       /* SF Pro regular ≈ 13.9px */
+  --fs-body: 17px;
+  --fs-lead: 21px;
+  --fs-h3: 24px;
+  --fs-h2: 32px;
+  --fs-h1: 48px;         /* SF Pro semibold ≈ 47.8px / 52px lh */
+  --fs-hero: 56px;       /* SF Pro bold ≈ 55.9px / 60px lh / -0.28px */
+
+  /* spacing (4px grid) */
+  --s-1: 4px;
+  --s-2: 8px;
   --s-3: 12px;
   --s-4: 16px;
   --s-5: 20px;
   --s-6: 24px;
   --s-8: 32px;
-  --s-10:40px;
-  --s-12:48px;
-  --s-16:64px;
+  --s-10: 40px;
+  --s-12: 48px;
+  --s-16: 64px;
+  --s-20: 80px;
 
-  /* --- RADIUS --- */
-  --radius:    4px;
-  --fd-radius: 4px;
+  /* radii */
+  --r-sm: 6px;
+  --r: 12px;
+  --r-lg: 18px;
 
-  /* --- LAYOUT --- */
-  --fd-layout-width:    1200px;
-  --fd-sidebar-width:   260px;
-  --fd-toc-width:       220px;
-  --fd-nav-height:       56px;
+  /* fonts: use Apple system stack */
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono:
+    "SF Mono", ui-monospace, Menlo, Monaco, "Cascadia Mono", "Roboto Mono",
+    monospace;
+
+  /* Map Fumadocs design tokens onto Apple system */
+  --color-fd-background: var(--ad-paper);
+  --color-fd-foreground: var(--ad-ink);
+  --color-fd-muted: var(--ad-paper-3);
+  --color-fd-muted-foreground: var(--ad-muted);
+  --color-fd-card: var(--ad-card);
+  --color-fd-card-foreground: var(--ad-ink);
+  --color-fd-popover: var(--ad-paper);
+  --color-fd-popover-foreground: var(--ad-ink);
+  --color-fd-primary: var(--ad-blue);
+  --color-fd-primary-foreground: #ffffff;
+  --color-fd-secondary: var(--ad-paper-3);
+  --color-fd-secondary-foreground: var(--ad-ink);
+  --color-fd-accent: var(--ad-card-hover);
+  --color-fd-accent-foreground: var(--ad-ink);
+  --color-fd-border: var(--ad-rule);
+  --color-fd-ring: var(--ad-blue);
 }
 
-/* ============================================================
- * GLOBAL RESETS — enforce the source of truth
- * ============================================================ */
-
-html {
-  font-size: var(--text-base);
-  background: var(--color-paper);
-  color: var(--color-ink);
+html,
+body {
+  background: var(--ad-paper);
+  color: var(--ad-ink);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.47059;
+  letter-spacing: -0.022em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
 }
-
-body {
-  background: var(--color-paper);
-  color: var(--color-ink);
-  font-family: var(--font-inter-tight), -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, sans-serif;
-  font-feature-settings: 'ss01', 'cv11';
-}
-
-/* One font everywhere — no exceptions */
-html, body, button, input, select, textarea, code, pre, kbd, samp,
-.fd-nav, .fd-sidebar, aside, nav, main, article, section, header, footer,
-h1, h2, h3, h4, h5, h6, p, span, a, li, div, label, summary {
-  font-family: var(--font-inter-tight), -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, sans-serif !important;
-}
-
-/* No uppercase. No bold. No italics. Ever. */
-* {
-  text-transform: none !important;
-  letter-spacing: normal !important;
-}
-strong, b { font-weight: var(--w-medium) !important; }
-em, i     { font-style: normal !important; }
-
-/* Single radius across all chrome */
-.rounded, .rounded-sm, .rounded-md, .rounded-lg,
-.rounded-xl, .rounded-2xl, .rounded-3xl,
-[class*='rounded'] {
-  border-radius: var(--radius) !important;
-}
-
-/* ============================================================
- * NAVIGATION — quiet, full-width rule, no shadow
- * ============================================================ */
-
-.fd-nav, [data-nav], header[class*='nav'] {
-  background: var(--color-paper) !important;
-  border-bottom: 1px solid var(--color-rule) !important;
-  box-shadow: none !important;
-  height: var(--fd-nav-height) !important;
-}
-
-/* Logo size — keep restrained */
-.fd-nav img, header img { max-height: 28px; width: auto; }
-
-/* Nav links — soft ink, accent on hover */
-.fd-nav a, header[class*='nav'] a {
-  color: var(--color-ink-soft) !important;
-  font-size: var(--text-sm) !important;
-  font-weight: var(--w-regular) !important;
-}
-.fd-nav a:hover, header[class*='nav'] a:hover {
-  color: var(--color-accent) !important;
-}
-
-/* ============================================================
- * SIDEBAR — paper background, no panel feel
- * ============================================================ */
-
-aside, .fd-sidebar, [data-sidebar], nav[class*='sidebar'] {
-  background: var(--color-paper) !important;
-  border-right: 1px solid var(--color-rule) !important;
-}
-
-/* Sidebar item links — quiet by default, accent for active */
-aside a, .fd-sidebar a {
-  color: var(--color-ink-soft) !important;
-  font-size: var(--text-sm) !important;
-  font-weight: var(--w-regular) !important;
-  padding: var(--s-2) var(--s-3) !important;
-  border-radius: var(--radius) !important;
-}
-aside a:hover, .fd-sidebar a:hover {
-  background: var(--color-surface) !important;
-  color: var(--color-ink) !important;
-}
-aside a[data-active='true'], .fd-sidebar a[data-active='true'],
-aside a.active, .fd-sidebar a.active {
-  color: var(--color-accent) !important;
-  background: var(--color-accent-soft) !important;
-  font-weight: var(--w-medium) !important;
-}
-
-/* Sidebar section headings — small, muted, restrained */
-aside h1, aside h2, aside h3, aside h4, aside h5,
-.fd-sidebar h1, .fd-sidebar h2, .fd-sidebar h3 {
-  font-size: var(--text-xs) !important;
-  font-weight: var(--w-medium) !important;
-  color: var(--color-ink-muted) !important;
-  margin: var(--s-4) var(--s-3) var(--s-2) !important;
-}
-
-/* ============================================================
- * TABLE OF CONTENTS — tight, secondary
- * ============================================================ */
-
-[data-toc], aside[class*='toc'] {
-  font-size: var(--text-sm) !important;
-}
-[data-toc] a {
-  color: var(--color-ink-muted) !important;
-  padding: var(--s-1) 0 !important;
-  border-left: 2px solid transparent !important;
-  padding-left: var(--s-3) !important;
-}
-[data-toc] a:hover { color: var(--color-ink) !important; }
-[data-toc] a[data-active='true'] {
-  color: var(--color-accent) !important;
-  border-left-color: var(--color-accent) !important;
-}
-
-/* ============================================================
- * EDITORIAL TYPOGRAPHY — the reading experience
- * ============================================================ */
-
-.prose, article, main [class*='prose'] {
-  font-size: var(--text-base);
-  line-height: var(--leading-loose);
-  color: var(--color-ink);
-  max-width: 72ch;
-}
-
-.prose h1, article h1 {
-  font-size: var(--text-2xl);
-  font-weight: var(--w-medium);
-  line-height: var(--leading-tight);
-  color: var(--color-ink);
-  margin: 0 0 var(--s-2);
-  letter-spacing: -0.01em !important;
-}
-
-/* Subtle accent rule under entry title */
-.prose h1::after, article > h1:first-of-type::after {
-  content: '';
-  display: block;
-  width: 40px;
-  height: 2px;
-  background: var(--color-accent);
-  margin-top: var(--s-4);
-  margin-bottom: var(--s-6);
-}
-
-.prose h2 {
-  font-size: var(--text-xl);
-  font-weight: var(--w-medium);
-  line-height: var(--leading-snug);
-  margin: var(--s-10) 0 var(--s-3);
-  color: var(--color-ink);
-}
-
-.prose h3 {
-  font-size: var(--text-lg);
-  font-weight: var(--w-medium);
-  line-height: var(--leading-snug);
-  margin: var(--s-8) 0 var(--s-2);
-  color: var(--color-ink);
-}
-
-.prose h4 {
-  font-size: var(--text-md);
-  font-weight: var(--w-medium);
-  margin: var(--s-6) 0 var(--s-2);
-  color: var(--color-ink);
-}
-
-.prose p {
-  margin: var(--s-4) 0;
-  color: var(--color-ink);
-}
-
-.prose a {
-  color: var(--color-accent) !important;
-  text-decoration: underline;
-  text-decoration-color: var(--color-rule-strong);
-  text-underline-offset: 3px;
-  text-decoration-thickness: 1px;
-}
-.prose a:hover {
-  text-decoration-color: var(--color-accent);
-}
-
-.prose blockquote {
-  border-left: 2px solid var(--color-accent);
-  padding-left: var(--s-4);
-  margin: var(--s-6) 0;
-  color: var(--color-ink-soft);
-}
-
-.prose ul, .prose ol {
-  margin: var(--s-4) 0;
-  padding-left: var(--s-6);
-}
-.prose li { margin: var(--s-2) 0; }
-
-.prose hr {
-  border: none;
-  border-top: 1px solid var(--color-rule);
-  margin: var(--s-10) 0;
-}
-
-/* ============================================================
- * SEARCH — visible affordance, quiet style
- * ============================================================ */
-
-[data-search-toggle], button[aria-label*='Search' i] {
-  background: var(--color-surface) !important;
-  border: 1px solid var(--color-rule) !important;
-  border-radius: var(--radius) !important;
-  color: var(--color-ink-muted) !important;
-  font-size: var(--text-sm) !important;
-}
-[data-search-toggle]:hover, button[aria-label*='Search' i]:hover {
-  border-color: var(--color-rule-strong) !important;
-  color: var(--color-ink) !important;
-}
-
-/* ============================================================
- * MOBILE — restore hierarchy, breathing room, separation
- * ============================================================ */
-
-@media (max-width: 768px) {
-  :root {
-    --fd-sidebar-width: 100%;
-    --fd-nav-height: 52px;
-  }
-
-  .prose, article, main {
-    padding: 0 var(--s-4);
-  }
-
-  .prose h1, article h1 { font-size: var(--text-xl); }
-  .prose h2 { font-size: var(--text-lg); margin-top: var(--s-8); }
-  .prose h3 { font-size: var(--text-md); margin-top: var(--s-6); }
-  .prose p, .prose li { font-size: var(--text-base); }
-
-  /* Mobile sheet / popover — clearly separated card with shadow */
-  [data-mobile], [class*='Sheet'], [class*='Drawer'],
-  [role='dialog'][data-state='open'] {
-    background: var(--color-paper) !important;
-    border: 1px solid var(--color-rule) !important;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08) !important;
-  }
-
-  /* Make sure mobile nav is sticky and has the bottom rule */
-  .fd-nav, header[class*='nav'] {
-    position: sticky !important;
-    top: 0 !important;
-    z-index: 50 !important;
-    backdrop-filter: blur(8px);
-    background: rgba(250, 250, 247, 0.92) !important;
-  }
-}
-
-/* ============================================================
- * UTILITIES
- * ============================================================ */
 
 ::selection {
-  background: var(--color-accent-soft);
-  color: var(--color-accent);
+  background: var(--ad-blue);
+  color: #fff;
 }
 
-/* Quiet scrollbar */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-rule-strong) transparent;
+/* =========================================================================
+   Article typography — Apple's editorial scale
+   ========================================================================= */
+article h1 {
+  font-size: var(--fs-h1);
+  font-weight: 600;
+  letter-spacing: -0.003em; /* SF Pro semibold ≈ -0.144 / 47.8 */
+  line-height: 1.0833;       /* 52 / 48 */
+  margin: 0 0 var(--s-4);
+  color: var(--ad-ink);
+}
+
+article h2 {
+  font-size: var(--fs-h2);
+  font-weight: 600;
+  letter-spacing: -0.004em;
+  line-height: 1.125;
+  margin: var(--s-12) 0 var(--s-4);
+  color: var(--ad-ink);
+}
+
+article h3 {
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  letter-spacing: -0.006em;
+  line-height: 1.16667;
+  margin: var(--s-8) 0 var(--s-3);
+  color: var(--ad-ink);
+}
+
+article h4,
+article h5,
+article h6 {
+  font-size: var(--fs-body);
+  font-weight: 600;
+  letter-spacing: -0.022em;
+  line-height: 1.41176;
+  margin: var(--s-6) 0 var(--s-2);
+  color: var(--ad-ink);
+}
+
+article p,
+article li {
+  font-size: var(--fs-body);
+  line-height: 1.52947;
+  letter-spacing: -0.022em;
+  color: var(--ad-ink-2);
+  margin: var(--s-4) 0;
+}
+
+article ul,
+article ol {
+  padding-left: var(--s-6);
+  margin: var(--s-4) 0;
+}
+
+article ul {
+  list-style: disc;
+}
+
+article ol {
+  list-style: decimal;
+}
+
+article a {
+  color: var(--ad-blue);
+  text-decoration: none;
+}
+
+article a:hover {
+  text-decoration: underline;
+}
+
+article blockquote {
+  margin: var(--s-6) 0;
+  padding-left: var(--s-5);
+  border-left: 2px solid var(--ad-rule);
+  color: var(--ad-muted);
+  font-style: normal;
+}
+
+article code {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  background: var(--ad-paper-3);
+  padding: 2px 6px;
+  border-radius: var(--r-sm);
+}
+
+article pre {
+  font-family: var(--font-mono);
+  background: var(--ad-paper-3);
+  border: 1px solid var(--ad-rule-soft);
+  border-radius: var(--r);
+  padding: var(--s-4);
+  margin: var(--s-6) 0;
+  overflow-x: auto;
+}
+
+/* "Abstract" lead paragraph after the article h1 */
+article > h1 + p {
+  font-size: var(--fs-lead);
+  line-height: 1.381;
+  letter-spacing: 0.011em;
+  color: var(--ad-muted);
+  font-weight: 400;
+  margin-top: 0;
+  margin-bottom: var(--s-10);
+}
+
+/* =========================================================================
+   Fumadocs sidebar — Apple-style left rail
+   ========================================================================= */
+[data-fd-sidebar],
+aside {
+  font-size: var(--fs-meta);
+}
+
+/* Section heading inside the sidebar */
+[data-fd-sidebar] [data-radix-collection-item],
+[data-fd-sidebar] a {
+  letter-spacing: -0.014em;
 }

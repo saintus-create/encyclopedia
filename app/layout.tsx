@@ -1,23 +1,27 @@
 import "./global.css";
 import { RootProvider } from "fumadocs-ui/provider";
 import type { ReactNode } from "react";
-import { Inter_Tight } from "next/font/google";
+import { SiteNav } from "@/components/site-nav";
+import { SiteFooter } from "@/components/site-footer";
 
-const interTight = Inter_Tight({
-  subsets: ["latin"],
-  variable: "--font-inter-tight",
-  display: "swap",
-});
+export const metadata = {
+  title: {
+    default: "Encyclopedia of Rhetoric & Composition",
+    template: "%s | Encyclopedia of Rhetoric & Composition",
+  },
+  description:
+    "A reference encyclopedia of rhetoric and composition: communication from ancient times to the information age.",
+};
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={interTight.variable}
-      suppressHydrationWarning
-    >
-      <body className={`${interTight.className} flex flex-col min-h-screen`}>
-        <RootProvider>{children}</RootProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body className="flex min-h-screen flex-col antialiased">
+        <RootProvider>
+          <SiteNav />
+          <div className="flex flex-1 flex-col">{children}</div>
+          <SiteFooter />
+        </RootProvider>
       </body>
     </html>
   );

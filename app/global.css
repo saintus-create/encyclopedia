@@ -45,7 +45,7 @@
   --fs-lead: 21px;
   --fs-h3: 24px;
   --fs-h2: 32px;
-  --fs-h1: 48px;         /* SF Pro semibold ≈ 47.8px / 52px lh */
+  --fs-h1: 40px;         /* docs page title — Apple uses 40, not the 56 hero */
   --fs-hero: 56px;       /* SF Pro bold ≈ 55.9px / 60px lh / -0.28px */
 
   /* spacing (4px grid) */
@@ -66,7 +66,7 @@
   --r: 12px;
   --r-lg: 18px;
 
-  /* fonts: use Apple system stack */
+  /* fonts: Apple system stack */
   --font-sans:
     -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
     "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -112,17 +112,32 @@ body {
 
 /* =========================================================================
    Article typography — Apple's editorial scale
+   Wrapping page content in <article> is what lets these win over
+   Fumadocs's typography plugin (which uses :where() = specificity 0).
    ========================================================================= */
-article h1 {
+/* Inner content article — Fumadocs's DocsBody is already an <article>
+   with its own padding/width, so we only need to constrain the prose
+   column and add a small bottom rhythm. No top padding (outer article
+   already provides it). */
+article article {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 0 var(--s-16);
+}
+
+/* All editorial typography is scoped to the inner <article> we add inside
+   DocsBody — that way we don't accidentally style Fumadocs's outer
+   article wrapper or anything else on the page. */
+article article h1 {
   font-size: var(--fs-h1);
   font-weight: 600;
-  letter-spacing: -0.003em; /* SF Pro semibold ≈ -0.144 / 47.8 */
-  line-height: 1.0833;       /* 52 / 48 */
+  letter-spacing: -0.003em;
+  line-height: 1.0833;
   margin: 0 0 var(--s-4);
   color: var(--ad-ink);
 }
 
-article h2 {
+article article h2 {
   font-size: var(--fs-h2);
   font-weight: 600;
   letter-spacing: -0.004em;
@@ -131,7 +146,7 @@ article h2 {
   color: var(--ad-ink);
 }
 
-article h3 {
+article article h3 {
   font-size: var(--fs-h3);
   font-weight: 600;
   letter-spacing: -0.006em;
@@ -140,9 +155,9 @@ article h3 {
   color: var(--ad-ink);
 }
 
-article h4,
-article h5,
-article h6 {
+article article h4,
+article article h5,
+article article h6 {
   font-size: var(--fs-body);
   font-weight: 600;
   letter-spacing: -0.022em;
@@ -151,8 +166,8 @@ article h6 {
   color: var(--ad-ink);
 }
 
-article p,
-article li {
+article article p,
+article article li {
   font-size: var(--fs-body);
   line-height: 1.52947;
   letter-spacing: -0.022em;
@@ -160,30 +175,22 @@ article li {
   margin: var(--s-4) 0;
 }
 
-article ul,
-article ol {
+article article ul,
+article article ol {
   padding-left: var(--s-6);
   margin: var(--s-4) 0;
 }
 
-article ul {
-  list-style: disc;
-}
+article article ul { list-style: disc; }
+article article ol { list-style: decimal; }
 
-article ol {
-  list-style: decimal;
-}
-
-article a {
+article article a {
   color: var(--ad-blue);
   text-decoration: none;
 }
+article article a:hover { text-decoration: underline; }
 
-article a:hover {
-  text-decoration: underline;
-}
-
-article blockquote {
+article article blockquote {
   margin: var(--s-6) 0;
   padding-left: var(--s-5);
   border-left: 2px solid var(--ad-rule);
@@ -191,7 +198,7 @@ article blockquote {
   font-style: normal;
 }
 
-article code {
+article article code {
   font-family: var(--font-mono);
   font-size: 15px;
   background: var(--ad-paper-3);
@@ -199,7 +206,7 @@ article code {
   border-radius: var(--r-sm);
 }
 
-article pre {
+article article pre {
   font-family: var(--font-mono);
   background: var(--ad-paper-3);
   border: 1px solid var(--ad-rule-soft);
@@ -209,8 +216,27 @@ article pre {
   overflow-x: auto;
 }
 
-/* "Abstract" lead paragraph after the article h1 */
-article > h1 + p {
+article article table {
+  width: 100%;
+  margin: var(--s-6) 0;
+  border-collapse: collapse;
+  font-size: var(--fs-meta);
+}
+article article th,
+article article td {
+  text-align: left;
+  padding: var(--s-3) var(--s-4);
+  border-bottom: 1px solid var(--ad-rule-soft);
+}
+article article th {
+  font-weight: 600;
+  color: var(--ad-ink);
+  background: var(--ad-paper-2);
+}
+article article td { color: var(--ad-ink-2); }
+
+/* "Abstract" lead paragraph immediately after the article h1 */
+article article > h1 + p {
   font-size: var(--fs-lead);
   line-height: 1.381;
   letter-spacing: 0.011em;
@@ -221,15 +247,73 @@ article > h1 + p {
 }
 
 /* =========================================================================
-   Fumadocs sidebar — Apple-style left rail
+   Hide Fumadocs's mobile/tablet TOC strip — we already have a global
+   black SiteNav and the right-rail TOC at xl+, so the duplicate
+   stacked nav under the SiteNav is what was making the page look broken.
    ========================================================================= */
-[data-fd-sidebar],
-aside {
-  font-size: var(--fs-meta);
+#nd-tocnav {
+  display: none;
 }
 
-/* Section heading inside the sidebar */
-[data-fd-sidebar] [data-radix-collection-item],
-[data-fd-sidebar] a {
-  letter-spacing: -0.014em;
+/* =========================================================================
+   Sidebar — Apple-style left rail (override Fumadocs DocsLayout density)
+   ========================================================================= */
+[id^="nd-sidebar"],
+aside[data-collapsed],
+aside.fd-sidebar {
+  font-family: var(--font-sans);
 }
+
+/* Sidebar links: tighter, smaller, no rounded chip on default */
+aside a[data-active] {
+  font-size: 13px;
+  padding-block: 4px;
+  padding-inline: 8px;
+  letter-spacing: -0.014em;
+  border-radius: 4px;
+  color: var(--ad-ink-2);
+}
+aside a[data-active="true"] {
+  background: rgba(0, 102, 204, 0.08);
+  color: var(--ad-blue);
+  font-weight: 500;
+}
+aside a[data-active="false"]:hover {
+  background: var(--ad-paper-3);
+  color: var(--ad-ink);
+}
+
+/* Sidebar group labels (folder names) */
+aside p,
+aside [data-radix-collection-item] > span:first-child {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--ad-ink);
+  text-transform: none;
+}
+
+/* =========================================================================
+   TOC ("On this page") — keep label on one line, Apple right-rail style
+   ========================================================================= */
+[role="navigation"][aria-label*="page"],
+.fd-toc {
+  font-size: 13px;
+}
+
+/* Make the TOC heading not wrap */
+.fd-toc-header,
+nav h3,
+[data-radix-scroll-area-viewport] > div > p:first-child {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--ad-ink);
+  white-space: nowrap;
+  margin-bottom: var(--s-2);
+}
+
+/* =========================================================================
+   Search dialog: keep Apple type
+   ========================================================================= */
+[role="dialog"] input { font-family: var(--font-sans); }

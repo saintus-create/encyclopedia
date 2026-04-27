@@ -28,18 +28,21 @@ export default async function Page(props: {
   return (
     <DocsPage toc={content.toc} full={content.full}>
       <DocsBody>
-        {/* Use raw h1/p so the global typography rules apply.
-            Fumadocs's DocsTitle/DocsDescription bake in
-            text-3xl/font-bold which would override our scale. */}
-        <h1>{content.title}</h1>
-        {content.description ? <p>{content.description}</p> : null}
+        {/* Wrapping in <article> matters: Fumadocs's typography plugin uses
+            :where() (specificity 0) selectors keyed off the DocsBody div,
+            but our global.css article-scoped rules are how we enforce the
+            Apple type system. The <article> element lets those win. */}
+        <article>
+          <h1>{content.title}</h1>
+          {content.description ? <p>{content.description}</p> : null}
 
-        <MdxContent
-          components={createMdxComponents(params.slug?.[0] === "app")}
-        />
-        {page.file.name === "index" && (
-          <DocsCategory page={page} from={source} />
-        )}
+          <MdxContent
+            components={createMdxComponents(params.slug?.[0] === "app")}
+          />
+          {page.file.name === "index" && (
+            <DocsCategory page={page} from={source} />
+          )}
+        </article>
       </DocsBody>
     </DocsPage>
   );

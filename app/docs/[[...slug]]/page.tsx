@@ -1,9 +1,36 @@
 import { createMdxComponents } from "@/components/mdx";
 import { isLocal, source } from "@/lib/source";
 import { DocsPage, DocsBody, DocsCategory } from "fumadocs-ui/page";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export const revalidate = 7200;
+
+const LETTER_NAME: Record<string, string> = {
+  a: "A",
+  b: "B",
+  c: "C",
+  d: "D",
+  e: "E",
+  f: "F",
+  g: "G",
+  h: "H",
+  i: "I",
+  k: "K",
+  l: "L",
+  m: "M",
+  n: "N",
+  o: "O",
+  p: "P",
+  q: "Q",
+  r: "R",
+  s: "S",
+  t: "T",
+  u: "U",
+  v: "V",
+  w: "W",
+  y: "Y",
+};
 
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>;
@@ -25,23 +52,58 @@ export default async function Page(props: {
 
   const MdxContent = content.body;
 
+  const slugSegs = params.slug ?? [];
+  const isIndex = page.file.name === "index";
+  const sectionLetter =
+    slugSegs.length > 0 && LETTER_NAME[slugSegs[0]] ? slugSegs[0] : null;
+  const sectionLabel = sectionLetter ? LETTER_NAME[sectionLetter] : null;
+
+  // Apple uses "Protocol", "Article", "Tutorial" etc. as the eyebrow above
+  // a docs page H1 to disambiguate the page kind. The encyclopedia maps
+  // cleanly onto: index pages = "Section", entry pages = "Entry".
+  const eyebrow = isIndex
+    ? sectionLabel
+      ? `Section ${sectionLabel}`
+      : "Overview"
+    : "Entry";
+
   return (
     <DocsPage toc={content.toc} full={content.full}>
       <DocsBody>
-        {/* Wrapping in <article> matters: Fumadocs's typography plugin uses
-            :where() (specificity 0) selectors keyed off the DocsBody div,
-            but our global.css article-scoped rules are how we enforce the
-            Apple type system. The <article> element lets those win. */}
-        <article>
+        {/*
+          `not-prose` is the single most important class on this page.
+          Fumadocs's DocsBody wraps every page in <div class="prose">, which
+          activates @tailwindcss/typography rules with selector specificity
+          (0,1,0) — strong enough to defeat any plain `article h1 { … }`
+          rule we write. The `not-prose` opt-out switches all those
+          :where(...):not([class~=not-prose]) rules off for this subtree, so
+          our Apple type scale in global.css (specificity (0,0,3)) wins
+          cleanly against Tailwind Preflight (specificity (0,0,1)).
+        */}
+        <article className="not-prose ad-article">
+          {/* Breadcrumb — Apple's "Framework / Symbol" hairline above H1 */}
+          <nav className="ad-breadcrumb" aria-label="Breadcrumb">
+            <Link href="/docs">All entries</Link>
+            {sectionLabel && (
+              <>
+                <span aria-hidden> / </span>
+                <Link href={`/docs/${sectionLetter}`}>{sectionLabel}</Link>
+              </>
+            )}
+          </nav>
+
+          {/* Eyebrow — Apple's "Protocol" / "Article" disambiguator */}
+          <p className="ad-eyebrow">{eyebrow}</p>
+
           <h1>{content.title}</h1>
-          {content.description ? <p>{content.description}</p> : null}
+          {content.description ? (
+            <p className="ad-lead">{content.description}</p>
+          ) : null}
 
           <MdxContent
             components={createMdxComponents(params.slug?.[0] === "app")}
           />
-          {page.file.name === "index" && (
-            <DocsCategory page={page} from={source} />
-          )}
+          {isIndex && <DocsCategory page={page} from={source} />}
         </article>
       </DocsBody>
     </DocsPage>

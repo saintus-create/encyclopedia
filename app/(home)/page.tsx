@@ -1,5 +1,7 @@
 import Link from "next/link";
+import "./home.scss";
 import { HomeSearch } from "@/components/home-search";
+
 
 const LETTERS = [
   "a", "b", "c", "d", "e", "f", "g", "h", "i", "k",
@@ -52,26 +54,12 @@ const SECTIONS = [
 
 export default function HomePage() {
   return (
-    <main className="flex flex-1 flex-col bg-[var(--ad-paper)]">
-      {/* === Sub-header (Apple "Documentation" band) ============================ */}
-      <section className="border-b border-[var(--ad-rule-soft)] bg-[var(--ad-paper)]">
-        <div className="mx-auto flex w-full max-w-[1024px] flex-col gap-6 px-4 pt-12 pb-8 md:flex-row md:items-end md:justify-between">
-          <div>
-            <p className="mb-2 text-[12px] font-semibold tracking-[0.06em] text-[var(--ad-muted)] uppercase">
-              Documentation
-            </p>
-            <h1 className="text-[40px] leading-[1.05] font-semibold tracking-tight text-[var(--ad-ink)] md:text-[48px]">
-              Encyclopedia
-            </h1>
-            <p className="mt-3 max-w-[640px] text-[17px] leading-[1.47] text-[var(--ad-muted)]">
-              274 entries on rhetoric and composition — figures, terms, methods,
-              and movements from ancient times to the information age.
-            </p>
-          </div>
-          <div className="w-full md:w-[320px]">
-            <HomeSearch />
-          </div>
-        </div>
+    <main className="home-main">
+      {/* === Hero Section (Premium SASS) */}
+      <section className="home-hero">
+        <h1>Encyclopedia of Rhetoric &amp; Composition</h1>
+        <p>274 entries covering figures, terms, and movements from ancient times to the information age.</p>
+        <HomeSearch />
       </section>
 
       {/* === Two-column layout: left rail + main =============================== */}

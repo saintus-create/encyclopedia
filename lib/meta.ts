@@ -121,7 +121,7 @@ export const meta: VirtualFile[] = [
     path: "l/meta.json",
     data: {
       title: "L",
-      pages: ["lauer-janice-m-b-1931","linda-ferreira-buckley","linguistics","literacy","liturgy","logic","logocentrism","logology","logos"],
+      pages: ["language-arts","lauer-janice-m-b-1931","linda-ferreira-buckley","linguistics","literacy","liturgy","logic","logocentrism","logology","logos"],
     },
   },
   {
@@ -153,7 +153,7 @@ export const meta: VirtualFile[] = [
     path: "p/meta.json",
     data: {
       title: "P",
-      pages: ["parenthesis","partitio","pathos","pentad","pentad-symbolic-action","pentad-tagmemics-techn-topics","peripatetics","periphrasis","peroratio","persona","persuasion","persuasion-political-rhetoric","phron-sis","pizan-christine-de-1364-c-1430","pleonasm","ploce","poetics","polyptoton","polysyndeton","port-royalists","portfolio","postmodernism","poststructuralism","poststructuralism","pragmatism","praxis","preteritio","probability","process-product","project-protocols","prolegomena","proof","proof","propaganda","propaganda","protest-rhetoric","protocols","pulpit-oratory-sermon"],
+      pages: ["parenthesis","partitio","pathos","pentad","pentad-symbolic-action","pentad-tagmemics-techn-topics","peripatetics","periphrasis","peroratio","persona","persuasion","persuasion-political-rhetoric","phron-sis","pizan-christine-de-1364-c-1430","pleonasm","ploce","poetics","polyptoton","polysyndeton","port-royalists","portfolio","postmodernism","poststructuralism","pragmatism","praxis","preteritio","probability","process-product","project-protocols","prolegomena","proof","propaganda","protest-rhetoric","protocols","pulpit-oratory-sermon"],
     },
   },
   {
@@ -161,7 +161,7 @@ export const meta: VirtualFile[] = [
     path: "q/meta.json",
     data: {
       title: "Q",
-      pages: ["quadrivium","quine-willard-van-orman-b-1908","quintilian","quintilian"],
+      pages: ["quadrivium","quine-willard-van-orman-b-1908","quintilian"],
     },
   },
   {
@@ -177,7 +177,7 @@ export const meta: VirtualFile[] = [
     path: "s/meta.json",
     data: {
       title: "S",
-      pages: ["salutatio","saussure-ferdinand-de-signified","scholasticism","sean-patrick-o-rourke","semiotics","sermon","shelley-percy-bysshe-1792-1822","sidney-sir-philip-1554-1586","signified-signifier-signifying","sociolinguistics","sophist","speaking-and-writing","speaking-and-writing","speech","speech-communication","speech-metaphor-tropes","speech-stylistics-tropes","stasis-theory","style","syllogism","symploce","synecdoche"],
+      pages: ["salutatio","saussure-ferdinand-de-signified","scholasticism","sean-patrick-o-rourke","semiotics","sermon","shelley-percy-bysshe-1792-1822","sidney-sir-philip-1554-1586","signified-signifier-signifying","sociolinguistics","sophist","speaking-and-writing","speech","speech-communication","speech-metaphor-tropes","speech-stylistics-tropes","stasis-theory","style","syllogism","symploce","synecdoche"],
     },
   },
   {
